@@ -11,6 +11,11 @@
 #ifndef H_PERL
 #define H_PERL 1
 
+#ifdef SMOP_INTEGRATION
+/* SMOP integration requires MULTIPLICITY */
+#define MULTIPLICITY
+#endif
+
 #ifdef PERL_FOR_X2P
 /*
  * This file is being used for x2p stuff.
