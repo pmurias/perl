@@ -95,11 +95,22 @@ typedef struct hek HEK;
 
 /* Using C's structural equivalence to help emulate C++ inheritance here... */
 
+#ifdef SMOP_INTEGRATION
+#include "smop/base.h"
+/* makes the SV compatible with SMOP__Object*
+   plus the 2 sv-head building blocks */
+#define _SV_HEAD(ptrtype) \
+    SMOP__ResponderInterface* RI /* pointer to the responder interface */ \
+    ptrtype	sv_any;		/* pointer to body */	\
+    U32		sv_refcnt;	/* how many references to us */	\
+    U32		sv_flags	/* what we are */
+#else
 /* start with 2 sv-head building blocks */
 #define _SV_HEAD(ptrtype) \
     ptrtype	sv_any;		/* pointer to body */	\
     U32		sv_refcnt;	/* how many references to us */	\
     U32		sv_flags	/* what we are */
+#endif
 
 #define _SV_HEAD_UNION \
     union {				\
