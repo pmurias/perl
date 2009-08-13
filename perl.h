@@ -4792,7 +4792,16 @@ struct perl_vars *PL_VarsPtr;
    be per-thread is per-interpreter.
 */
 
+#ifdef SMOP_INTEGRATION
+#include "smop/base.h"
+#endif
+
 struct interpreter {
+#ifdef SMOP_INTEGRATION
+/* The ResponderInterface of the interpreter is used so that the
+   interpreter is a regular object as well. */
+SMOP__Object__BASE
+#endif
 #  include "intrpvar.h"
 };
 

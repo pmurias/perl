@@ -12,12 +12,6 @@
 =head1 Per-Interpreter Variables
 */
 
-#ifdef SMOP_INTEGRATION
-/* The ResponderInterface of the interpreter is used so that the
-   interpreter is a regular object as well. */
-SMOP__ResponderInterface* RI;
-#endif
-
 /* These variables are per-interpreter in threaded/multiplicity builds,
  * global otherwise.
 
