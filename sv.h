@@ -100,7 +100,7 @@ typedef struct hek HEK;
 /* makes the SV compatible with SMOP__Object*
    plus the 2 sv-head building blocks */
 #define _SV_HEAD(ptrtype) \
-    SMOP__ResponderInterface* RI /* pointer to the responder interface */ \
+    SMOP__Object__BASE          /* so that SV* is a SMOP__Object* */ \
     ptrtype	sv_any;		/* pointer to body */	\
     U32		sv_refcnt;	/* how many references to us */	\
     U32		sv_flags	/* what we are */
