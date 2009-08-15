@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <smop/base.h>
-#include <smop/s0native.h>
-#include <smop/nagc.h>
+#include "smop-base.h"
+#include "smop-s0native.h"
+#include "smop-nagc.h"
 
 #ifdef SMOP_LOCKING
 #include <pthread.h>
 #endif
 
-#include "weakref.h"
+#include "smop/nagc/src/weakref.h"
 
 #ifdef SMOP_LEAK_TRACE
 static SMOP__Object* leaks[20000];

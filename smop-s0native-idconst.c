@@ -2,18 +2,18 @@
  * create the pool of constant identifiers that are needed to
  * bootstrap smop.
  */
-#include <smop/base.h>
-#include <smop/s0native.h>
+#include "smop-base.h"
+#include "smop-s0native.h"
 
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
-#include <pthread.h>
+/*#include <pthread.h>*/
 #include <stdio.h>
 
 static SMOP__Object** constlist;
 static int constlist_size;
-static pthread_rwlock_t constlist_lock;
+/*static pthread_rwlock_t constlist_lock;*/
 
 
 /* The constant identifiers are not subject to garbage collection,
@@ -88,16 +88,16 @@ SMOP__Object* SMOP__NATIVE__idconst_create(const char* value) {
 SMOP__Object* SMOP__NATIVE__idconst_createn(const char* value, int size) {
   SMOP__Object* candidate = SMOP__NATIVE__idconst_createn_nolist(value,size);
 
-  assert(pthread_rwlock_rdlock(&constlist_lock) == 0);
+/*  assert(pthread_rwlock_rdlock(&constlist_lock) == 0);*/
   SMOP__Object** ret = bsearch(&candidate, constlist, constlist_size, sizeof(SMOP__Object*), cmp_idconst);
-  assert(pthread_rwlock_unlock(&constlist_lock) == 0);
+/*  assert(pthread_rwlock_unlock(&constlist_lock) == 0);*/
 
   if (ret) {
     SMOP__NATIVE__idconst_free(candidate);
     return *ret;
   } else {
 
-    assert(pthread_rwlock_wrlock(&constlist_lock) == 0);
+/*    assert(pthread_rwlock_wrlock(&constlist_lock) == 0);*/
 
     constlist_size++;
 
@@ -108,7 +108,7 @@ SMOP__Object* SMOP__NATIVE__idconst_createn(const char* value, int size) {
 
     qsort(constlist, constlist_size, sizeof(SMOP__Object*), cmp_idconst);
 
-    assert(pthread_rwlock_unlock(&constlist_lock) == 0);
+/*    assert(pthread_rwlock_unlock(&constlist_lock) == 0);*/
 
     return candidate;
   }
@@ -117,7 +117,7 @@ SMOP__Object* SMOP__NATIVE__idconst_createn(const char* value, int size) {
 
 void smop_idconst_init() {
 
-  // create the responder interface
+  /* create the responder interface */
   
   SMOP__NATIVE__idconst_RI = calloc(1,sizeof(SMOP__ResponderInterface));
   assert(SMOP__NATIVE__idconst_RI);
@@ -130,7 +130,7 @@ void smop_idconst_init() {
 
   qsort(constlist, constlist_size, sizeof(SMOP__Object*), cmp_idconst);
 
-  assert(pthread_rwlock_init(&constlist_lock, NULL) == 0);
+/*  assert(pthread_rwlock_init(&constlist_lock, NULL) == 0);*/
   
 }
 
@@ -144,11 +144,11 @@ void smop_idconst_destr() {
     constlist[i] = NULL;
   }
 
-  // destroy the responder interface.
+  /* destroy the responder interface. */
   free(SMOP__NATIVE__idconst_RI);
 
   free(constlist); constlist_size = 0;
-  pthread_rwlock_destroy(&constlist_lock);
+/*  pthread_rwlock_destroy(&constlist_lock);*/
 
 }
 

@@ -1,3 +1,4 @@
+#define MULTIPLICITY
 /*
  * perlio.c
  * Copyright (c) 1996-2006, Nick Ing-Simmons

@@ -96,7 +96,7 @@ typedef struct hek HEK;
 /* Using C's structural equivalence to help emulate C++ inheritance here... */
 
 #ifdef SMOP_INTEGRATION
-#include "smop/base.h"
+#include "smop-base.h"
 /* makes the SV compatible with SMOP__Object*
    plus the 2 sv-head building blocks */
 #define _SV_HEAD(ptrtype) \

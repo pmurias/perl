@@ -1,6 +1,6 @@
 #ifdef SMOP_PROFILE
-#include <smop/base.h>
-#include <smop/s0native.h>
+#include "smop-base.h"
+#include "smop-s0native.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

@@ -4793,7 +4793,7 @@ struct perl_vars *PL_VarsPtr;
 */
 
 #ifdef SMOP_INTEGRATION
-#include "smop/base.h"
+#include "smop-base.h"
 #endif
 
 struct interpreter {

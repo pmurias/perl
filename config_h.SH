@@ -4330,6 +4330,12 @@ sed <<!GROK!THIS! >$CONFIG_H -e 's!^#undef\(.*/\)\*!/\*#define\1 \*!' -e 's!^#un
  */
 #$mad	PERL_MAD		/**/
 
+/* SMOP_INTEGRATION:
+ *	This symbol, if defined, indicates that the SMOP
+ *	intergration code should be conditionally compiled.
+ */
+#$smop	SMOP_INTEGRATION		/**/
+
 /* NEED_VA_COPY:
  *	This symbol, if defined, indicates that the system stores
  *	the variable argument list datatype, va_list, in a format

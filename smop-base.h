@@ -1,7 +1,7 @@
 #ifndef SMOP_BASE_H
 #define SMOP_BASE_H
 
-// forward declarations
+/* forward declarations*/
 struct SMOP__Object; typedef struct SMOP__Object SMOP__Object;
 struct SMOP__ResponderInterface; typedef struct SMOP__ResponderInterface SMOP__ResponderInterface;
 

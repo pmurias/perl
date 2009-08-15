@@ -124,9 +124,9 @@ S_init_tls_and_interp(PerlInterpreter *my_perl)
 
 /* these implement the PERL_SYS_INIT, PERL_SYS_INIT3, PERL_SYS_TERM macros */
 #ifdef SMOP_INTEGRATION
-#include "smop/s0native.h"
-#include "smop/nagc.h"
-#include "smop/s1native.h"
+#include "smop-s0native.h"
+#include "smop-nagc.h"
+/*#include "smop/s1native.h"*/
 #endif
 
 void
@@ -137,7 +137,7 @@ Perl_sys_init(int* argc, char*** argv)
 #ifdef SMOP_INTEGRATION
     smop_s0native_init();
     smop_nagc_init();
-    smop_s1native_init();
+/*    smop_s1native_init(); */
 #endif
 
     PERL_ARGS_ASSERT_SYS_INIT;
@@ -155,7 +155,7 @@ Perl_sys_init3(int* argc, char*** argv, char*** env)
 #ifdef SMOP_INTEGRATION
     smop_s0native_init();
     smop_nagc_init();
-    smop_s1native_init();
+/*    smop_s1native_init(); */
 #endif
 
     PERL_ARGS_ASSERT_SYS_INIT3;
@@ -175,7 +175,7 @@ Perl_sys_term()
     }
 
 #ifdef SMOP_INTEGRATION
-    smop_s1native_destr();
+/*    smop_s1native_destr(); */
     smop_nagc_destr();
     smop_s0native_destr();
 #endif

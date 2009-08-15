@@ -1,8 +1,8 @@
 #include <stdlib.h>
-#include <smop/base.h>
-#include <smop/s0native.h>
-#include <smop/util.h>
-#include <smop/nagc.h>
+#include "smop-base.h"
+#include "smop-s0native.h"
+#include "smop-util.h"
+#include "smop-nagc.h"
 #include <stdio.h>
 
 static SMOP__Object* RI;

@@ -1,6 +1,6 @@
 #include <stdlib.h>
-#include <smop/base.h>
-#include <smop/s0native.h>
+#include "smop-base.h"
+#include "smop-s0native.h"
 SMOP__Object* SMOP__metaRI;
 void smop_metaRI_init() {
   SMOP__ResponderInterface* ri = calloc(1,sizeof(SMOP__ResponderInterface));

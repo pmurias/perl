@@ -1,7 +1,7 @@
 #ifndef SMOP_NAGC_H
 #define SMOP_NAGC_H
 
-#include <smop/base.h>
+#include "smop-base.h"
 #include <pthread.h>
 #define SMOP__NAGC__ResponderInterface__BASE     \
   SMOP__ResponderInterface__BASE                 \
@@ -31,12 +31,13 @@ SMOP__Object* SMOP__NAGC__RI__create(
   char *id
 );
 
-// weakrefs is handled privately...
+/* weakrefs is handled privately...*/
 #define SMOP__NAGC__Object__BASE      \
   SMOP__Object__BASE                  \
   int ref_cnt;                        \
-  pthread_rwlock_t* rwlock;           \
   void** weakrefs;
+
+/*  pthread_rwlock_t* rwlock;          */
   
 typedef struct SMOP__NAGC__Object {
   SMOP__NAGC__Object__BASE

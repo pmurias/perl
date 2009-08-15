@@ -1013,6 +1013,10 @@ mad=''
 madlyh=''
 madlyobj=''
 madlysrc=''
+smop=''
+smoplyh=''
+smoplyobj=''
+smoplysrc=''
 make_set_make=''
 d_mymalloc=''
 freetype=''
@@ -19905,6 +19909,39 @@ esac
 set mad
 eval $setvar
 
+: SMOP
+
+if $test $patchlevel -lt 9; then
+: SMOP is not available in 5.8.x or earlier.
+    ans=n;
+else
+    case "$smop" in
+    $define|true|[yY]*)	dflt='y' ;;
+    *)			dflt='n' ;;
+    esac
+    cat <<EOM
+
+Would you like to build with SMOP integration?
+
+If this doesn't make any sense to you, just accept the default '$dflt'.
+EOM
+    rp='Build Perl with SMOP Integration?'
+    . ./myread
+fi
+case "$ans" in
+y|Y)	val="$define"
+	smoplyh=''
+	smoplysrc='smop-nagc-weakref.c smop-nagc-ri.c smop-nagc-nagc.c smop-s0native-profile.c smop-s0native-bool.c smop-s0native-empty_interpreter.c smop-s0native-idconst.c smop-s0native-s0native.c smop-s0native-metaRI.c   smop-util-hash.c'
+	smoplyobj="smop-nagc-weakref$_o smop-nagc-ri$_o smop-nagc-nagc$_o smop-s0native-profile$_o smop-s0native-bool$_o smop-s0native-empty_interpreter$_o smop-s0native-idconst$_o smop-s0native-s0native$_o smop-s0native-metaRI$_o smop-util-hash$_o" ;;
+
+*)	val="$undef"
+	smoplyh=''
+	smoplysrc=''
+	smoplyobj='' ;;
+esac
+set smop
+eval $setvar
+
 : check whether make sets MAKE
 echo " "
 echo "Checking if your $make program sets \$(MAKE)..." >&4
@@ -22918,6 +22955,10 @@ mad='$mad'
 madlyh='$madlyh'
 madlyobj='$madlyobj'
 madlysrc='$madlysrc'
+smop='$smop'
+smoplyh='$smoplyh'
+smoplyobj='$smoplyobj'
+smoplysrc='$smoplysrc'
 mail='$mail'
 mailx='$mailx'
 make='$make'
