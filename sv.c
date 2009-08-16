@@ -31,6 +31,7 @@
 #define PERL_IN_SV_C
 #include "perl.h"
 #include "regcomp.h"
+#include "smop-p5.h"
 
 #define FCALL *f
 
@@ -272,6 +273,15 @@ S_more_sv(pTHX)
 
 /* new_SV(): return a new, empty SV head */
 
+#define new_SV_do_stuff(p) \
+	if (PL_sv_root)					\
+	    uproot_SV(p);				\
+	else						\
+	    (p) = S_more_sv(aTHX);			\
+	SvANY(p) = 0;					\
+	SvREFCNT(p) = 1;				\
+	SvFLAGS(p) = 0;					
+
 #ifdef DEBUG_LEAKING_SCALARS
 /* provide a real function for a debugger to play with */
 STATIC SV*
@@ -279,13 +289,12 @@ S_new_SV(pTHX_ const char *file, int line, const char *func)
 {
     SV* sv;
 
-    if (PL_sv_root)
-	uproot_SV(sv);
-    else
-	sv = S_more_sv(aTHX);
-    SvANY(sv) = 0;
-    SvREFCNT(sv) = 1;
-    SvFLAGS(sv) = 0;
+    new_SV_do_stuff(sv);
+
+#ifdef SMOP_INTEGRATION
+    sv->RI = (SMOP__ResponderInterface*)SMOP__P5__SV__RI;
+#endif
+
     sv->sv_debug_optype = PL_op ? PL_op->op_type : 0;
     sv->sv_debug_line = (U16) (PL_parser && PL_parser->copline != NOLINE
 		? PL_parser->copline
@@ -307,16 +316,17 @@ S_new_SV(pTHX_ const char *file, int line, const char *func)
 }
 #  define new_SV(p) (p)=S_new_SV(aTHX_ __FILE__, __LINE__, FUNCTION__)
 
+#elif defined(SMOP_INTEGRATION)
+#  define new_SV(p) \
+    STMT_START {					\
+	new_SV_do_stuff(p)                              \
+	(p)->RI = (SMOP__ResponderInterface*)SMOP__P5__SV__RI;                 \
+	MEM_LOG_NEW_SV(p, __FILE__, __LINE__, FUNCTION__);  \
+    } STMT_END
 #else
 #  define new_SV(p) \
     STMT_START {					\
-	if (PL_sv_root)					\
-	    uproot_SV(p);				\
-	else						\
-	    (p) = S_more_sv(aTHX);			\
-	SvANY(p) = 0;					\
-	SvREFCNT(p) = 1;				\
-	SvFLAGS(p) = 0;					\
+	new_SV_do_stuff(p)                              \
 	MEM_LOG_NEW_SV(p, __FILE__, __LINE__, FUNCTION__);  \
     } STMT_END
 #endif

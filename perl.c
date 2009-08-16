@@ -137,6 +137,7 @@ Perl_sys_init(int* argc, char*** argv)
 #ifdef SMOP_INTEGRATION
     smop_s0native_init();
     smop_nagc_init();
+    smop_p5_init();
 /*    smop_s1native_init(); */
 #endif
 
@@ -155,6 +156,7 @@ Perl_sys_init3(int* argc, char*** argv, char*** env)
 #ifdef SMOP_INTEGRATION
     smop_s0native_init();
     smop_nagc_init();
+    smop_p5_init();
 /*    smop_s1native_init(); */
 #endif
 
@@ -178,6 +180,7 @@ Perl_sys_term()
 /*    smop_s1native_destr(); */
     smop_nagc_destr();
     smop_s0native_destr();
+    smop_p5_destr();
 #endif
 
 }
