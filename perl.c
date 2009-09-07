@@ -261,6 +261,10 @@ perl_construct(pTHXx)
 
     PERL_ARGS_ASSERT_PERL_CONSTRUCT;
 
+#ifdef SMOP_INTEROP
+    my_perl->RI = (SMOP__ResponderInterface*)SMOP__interpreter__SV__RI;
+#endif
+
 #ifdef MULTIPLICITY
     init_interp();
     PL_perl_destruct_level = 1;
