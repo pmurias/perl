@@ -31,7 +31,9 @@
 #define PERL_IN_SV_C
 #include "perl.h"
 #include "regcomp.h"
+#ifdef SMOP_INTEGRATION
 #include "smop-p5.h"
+#endif
 
 #define FCALL *f
 

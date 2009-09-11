@@ -4801,6 +4801,7 @@ struct interpreter {
 /* The ResponderInterface of the interpreter is used so that the
    interpreter is a regular object as well. */
 SMOP__Object__BASE
+SMOP__Object* continuation;
 #endif
 #  include "intrpvar.h"
 };

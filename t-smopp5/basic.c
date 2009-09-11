@@ -10,9 +10,6 @@ main (int argc, char **argv, char **env)
     char *embedding[] = { "", "-e", "0" };
 
 
-    /*HACK*/
-    SMOP__P5__interpreter__RI = (void*) 5 ;
-
     PERL_SYS_INIT3(&argc,&argv,&env);
     my_perl = perl_alloc();
     perl_construct( my_perl );
@@ -21,15 +18,16 @@ main (int argc, char **argv, char **env)
     PL_exit_flags |= PERL_EXIT_DESTRUCT_END;
     perl_run(my_perl);
 
-    printf("1..2\n");
+    printf("1..3\n");
      
     eval_pv("printf(\"ok 1 # survived interpreter creation\n\")",TRUE);
     if (my_perl->RI == (SMOP__ResponderInterface*)SMOP__P5__interpreter__RI) {
         printf("ok 2 # interpreter RI is set\n");
     }
-    //eval_pv("$a = 3; $a **= 2", TRUE);
-    //printf("a = %d\n", SvIV(get_sv("a", FALSE)));
-
+    eval_pv("$a = 3; $a **= 2", TRUE);
+    if (get_sv("a", FALSE)->RI == (SMOP__ResponderInterface*)SMOP__P5__SV__RI) {
+        printf("ok 3 # SV* RI is set\n");
+    }
 
     perl_destruct(my_perl);
     perl_free(my_perl);

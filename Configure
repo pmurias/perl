@@ -19931,8 +19931,8 @@ fi
 case "$ans" in
 y|Y)	val="$define"
 	smoplyh=''
-	smoplysrc='smop-nagc-weakref.c smop-nagc-ri.c smop-nagc-nagc.c smop-s0native-profile.c smop-s0native-bool.c smop-s0native-empty_interpreter.c smop-s0native-idconst.c smop-s0native-s0native.c smop-s0native-metaRI.c smop-util-hash.c smop-p5.c'
-	smoplyobj="smop-nagc-weakref$_o smop-nagc-ri$_o smop-nagc-nagc$_o smop-s0native-profile$_o smop-s0native-bool$_o smop-s0native-empty_interpreter$_o smop-s0native-idconst$_o smop-s0native-s0native$_o smop-s0native-metaRI$_o smop-util-hash$_o smop-p5$_o" ;;
+	smoplysrc='smop-nagc-weakref.c smop-nagc-ri.c smop-nagc-nagc.c smop-s0native-profile.c smop-s0native-bool.c smop-s0native-empty_interpreter.c smop-s0native-idconst.c smop-s0native-s0native.c smop-s0native-metaRI.c smop-util-hash.c smop-p5.c smop-interpreter.c'
+	smoplyobj="smop-nagc-weakref$_o smop-nagc-ri$_o smop-nagc-nagc$_o smop-s0native-profile$_o smop-s0native-bool$_o smop-s0native-empty_interpreter$_o smop-s0native-idconst$_o smop-s0native-s0native$_o smop-s0native-metaRI$_o smop-util-hash$_o smop-p5$_o smop-interpreter$_o" ;;
 
 *)	val="$undef"
 	smoplyh=''

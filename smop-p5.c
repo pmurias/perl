@@ -4,8 +4,10 @@
 SMOP__Object* SMOP__P5__SV__RI;
 SMOP__Object* SMOP__P5__interpreter__RI;
 void smop_p5_init(void) {
+    smop_interpreter_init();
 }
 void smop_p5_destr(void) {
+    smop_interpreter_destr();
 }
 
 

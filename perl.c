@@ -27,6 +27,10 @@
 #include "perl.h"
 #include "patchlevel.h"			/* for local_patches */
 
+#ifdef SMOP_INTEGRATION
+#include "smop-p5.h"
+#endif
+
 #ifdef NETWARE
 #include "nwutil.h"	
 #endif
@@ -261,8 +265,8 @@ perl_construct(pTHXx)
 
     PERL_ARGS_ASSERT_PERL_CONSTRUCT;
 
-#ifdef SMOP_INTEROP
-    my_perl->RI = (SMOP__ResponderInterface*)SMOP__interpreter__SV__RI;
+#ifdef SMOP_INTEGRATION
+    my_perl->RI = (SMOP__ResponderInterface*)SMOP__P5__interpreter__RI;
 #endif
 
 #ifdef MULTIPLICITY
